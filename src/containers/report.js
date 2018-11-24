@@ -73,7 +73,7 @@ class Report extends Component {
                         renderItem={this.renderItem}
                         keyExtractor={(item, index) => index}/> */}
                     <TouchableHighlight style={styles.addButton}
-                                        underlayColor='#ff7043' onPress={() => ''}>
+                                        underlayColor='#ff7043' onPress={() => this.props.navigation.navigate('Inspeksi', {})}>
                         <Text style={{fontSize: 25, color: 'white'}}>+</Text>
                     </TouchableHighlight>
                 </View>

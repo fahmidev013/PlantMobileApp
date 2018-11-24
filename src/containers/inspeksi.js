@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry,StyleSheet,View, Text } from 'react-native';
+import { AppRegistry,StyleSheet,View, Text, SectionList } from 'react-native';
 import { ViewPager } from 'rn-viewpager';
 
 import StepIndicator from 'react-native-step-indicator';
@@ -27,53 +27,7 @@ const firstIndicatorStyles = {
   currentStepLabelColor: '#4aae4f'
 }
 
-const secondIndicatorStyles = {
-  stepIndicatorSize: 30,
-  currentStepIndicatorSize:40,
-  separatorStrokeWidth: 2,
-  currentStepStrokeWidth: 3,
-  stepStrokeCurrentColor: '#fe7013',
-  stepStrokeWidth: 3,
-  stepStrokeFinishedColor: '#fe7013',
-  stepStrokeUnFinishedColor: '#aaaaaa',
-  separatorFinishedColor: '#fe7013',
-  separatorUnFinishedColor: '#aaaaaa',
-  stepIndicatorFinishedColor: '#fe7013',
-  stepIndicatorUnFinishedColor: '#ffffff',
-  stepIndicatorCurrentColor: '#ffffff',
-  stepIndicatorLabelFontSize: 13,
-  currentStepIndicatorLabelFontSize: 13,
-  stepIndicatorLabelCurrentColor: '#fe7013',
-  stepIndicatorLabelFinishedColor: '#ffffff',
-  stepIndicatorLabelUnFinishedColor: '#aaaaaa',
-  labelColor: '#999999',
-  labelSize: 13,
-  currentStepLabelColor: '#fe7013'
-}
 
-const thirdIndicatorStyles = {
-  stepIndicatorSize: 25,
-  currentStepIndicatorSize:30,
-  separatorStrokeWidth: 2,
-  currentStepStrokeWidth: 3,
-  stepStrokeCurrentColor: '#7eaec4',
-  stepStrokeWidth: 3,
-  stepStrokeFinishedColor: '#7eaec4',
-  stepStrokeUnFinishedColor: '#dedede',
-  separatorFinishedColor: '#7eaec4',
-  separatorUnFinishedColor: '#dedede',
-  stepIndicatorFinishedColor: '#7eaec4',
-  stepIndicatorUnFinishedColor: '#ffffff',
-  stepIndicatorCurrentColor: '#ffffff',
-  stepIndicatorLabelFontSize: 0,
-  currentStepIndicatorLabelFontSize: 0,
-  stepIndicatorLabelCurrentColor: 'transparent',
-  stepIndicatorLabelFinishedColor: 'transparent',
-  stepIndicatorLabelUnFinishedColor: 'transparent',
-  labelColor: '#999999',
-  labelSize: 13,
-  currentStepLabelColor: '#7eaec4'
-}
 
 const getStepIndicatorIconConfig = ({ position, stepStatus }) => {
     const iconConfig = {
@@ -140,6 +94,19 @@ export default class Inspeksi extends Component {
           ref={(viewPager) => {this.viewPager = viewPager}}
           onPageSelected={(page) => {this.setState({currentPage:page.position})}}
           >
+
+                <View style={styles.containerSec}>
+                <SectionList
+                sections={[
+                    {title: 'Perawatan', data: ['Devin', 'James', 'Jillian']},
+                    {title: 'Pemupukan', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
+                ]}
+                renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
+                keyExtractor={(item, index) => index}
+                />
+            </View>
+
             {PAGES.map((page) => this.renderViewPagerPage(page))}
           </ViewPager>
       </View>
@@ -170,5 +137,23 @@ const styles = StyleSheet.create({
       flex:1,
       justifyContent:'center',
       alignItems:'center'
-    }
+    },
+    containerSec: {
+        flex: 1,
+        paddingTop: 22
+       },
+       sectionHeader: {
+         paddingTop: 2,
+         paddingLeft: 10,
+         paddingRight: 10,
+         paddingBottom: 2,
+         fontSize: 14,
+         fontWeight: 'bold',
+         backgroundColor: 'rgba(247,247,247,1.0)',
+       },
+       item: {
+         padding: 10,
+         fontSize: 18,
+         height: 44,
+       },
   });

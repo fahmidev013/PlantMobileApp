@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { Platform ,Image, View, StyleSheet, Text } from 'react-native';
 import Images from '../img/index';
 import Tugas from "../containers/tugas";
+import Inspeksi from "../containers/inspeksi";
 
 const AppNavigatorOne = createStackNavigator(
     {
@@ -92,7 +93,7 @@ const MyNav = createBottomTabNavigator(
         screen: TabviewpagerContainer
       },
       Task: AppNavigatorTwo,
-      Inspeksi: AppNavigatorOne,
+      Inspeksi: Inspeksi,
       Finding: AppNavigatorTwo,
       More: AppNavigatorOne
     },

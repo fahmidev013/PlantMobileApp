@@ -5,19 +5,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
 
-class Card extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
-        <Text>{this.props.text}</Text>
-      </View>
-    )
-  }
-}
+import CardContainer from './CardContainer';
 
 class NoMoreCards extends Component {
   constructor(props) {
@@ -38,12 +26,12 @@ export default class extends React.Component {
     super(props);
     this.state = {
       cards: [
-        {text: 'Tomato', backgroundColor: 'tomato'},
-        {text: 'Aubergine', backgroundColor: 'tomato'},
-        {text: 'Courgette', backgroundColor: 'tomato'},
-        {text: 'Blueberry', backgroundColor: 'tomato'},
-        {text: 'Umm...', backgroundColor: 'tomato'},
-        {text: 'orange', backgroundColor: 'tomato'},
+        {text: 'Tomato', backgroundColor: '#eee'},
+        {text: 'Aubergine', backgroundColor: '#eee'},
+        {text: 'Courgette', backgroundColor: '#eee'},
+        {text: 'Blueberry', backgroundColor: '#eee'},
+        {text: 'Umm...', backgroundColor: '#eee'},
+        {text: 'orange', backgroundColor: '#eee'},
       ]
     };
   }
@@ -63,7 +51,7 @@ export default class extends React.Component {
     return (
       <SwipeCards
         cards={this.state.cards}
-        renderCard={(cardData) => <Card {...cardData} />}
+        renderCard={(cardData) => <CardContainer {...cardData} />}
         renderNoMoreCards={() => <NoMoreCards />}
 
         handleYup={this.handleYup}

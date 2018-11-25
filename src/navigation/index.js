@@ -3,10 +3,12 @@ import { createStackNavigator, createBottomTabNavigator, TabNavigator, StackNavi
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Report from '../containers/report';
 import React, { Component } from 'react';
-import { Platform ,Image, View, StyleSheet, Text } from 'react-native';
+import { Platform ,Image, View, StyleSheet, Button, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Images from '../img/index';
 import Tugas from "../containers/tugas";
 import Inspeksi from "../containers/inspeksi";
+
+const {width} = Dimensions.get('window');
 
 const AppNavigatorOne = createStackNavigator(
     {
@@ -37,6 +39,10 @@ const TabviewpagerController = TabNavigator({
       inactiveTintColor: '#555555', // active icon color
       activeTintColor: '#00b281',  
       indicatorStyle: {
+        marginBottom: 7,
+        marginLeft: (width / 4.6), 
+        width: 25,
+        height: '7%', 
         backgroundColor: '#00b281',
       },
       style: {
@@ -49,7 +55,7 @@ const TabviewpagerController = TabNavigator({
 
   const Header = (props) => (
     <View style={{height: 50, justifyContent: 'flex-end'}}>
-      <Text style={{fontFamily: 'dosis-bold', color: 'white', fontSize: 5}}>fd</Text>
+      <Text style={{fontFamily: 'dosis-bold', color: 'white', fontSize: 25}}>{props.judul}</Text>
     </View>
   );
 
@@ -58,29 +64,46 @@ const TabviewpagerController = TabNavigator({
       <View style={{ backgroundColor: '#eee' }}>
         <Image
           style={StyleSheet.absoluteFill}
-          source={require('../../assets/bg_header.png')}
+          source={Images.header}
         />
-        
-        <Header {...props} style={{ backgroundColor: 'transparent' }}/>
+        <Header titl={props} style={{ backgroundColor: 'transparent' }}/>
       </View>
     );
   
+
+    const MailBtn = (props) => 
+    (
+      <TouchableOpacity
+      onPress={''}
+      style={{ paddingRight: 13, paddingLeft: 13 }}>
+      <Ionicons name={props.direction === 'left' ? "ios-refresh" : "md-mail" } size={24} color={"#fff"} />
+      </TouchableOpacity>
+    )
+    
+
 
 const TabviewpagerContainer = StackNavigator(
   {
       Hommy: {
         screen: TabviewpagerController,
         navigationOptions : {
-            title: 'HOMEPAGE',   
-            headerTitleStyle: { color: '#fff' },
-            header: (props) => <ImageHeader {...props} />, 
+            title: 'Home',       
+            headerRight: <MailBtn direction='right'/>,
+            headerLeft: <MailBtn direction='left'/>,
+            //header: (props) => <ImageHeader {...props} />, 
+            //header: (props) => <ImageHeader titl='HOMEPAGE' />,
             headerStyle: {
-                backgroundColor: '#f4511e',
+                backgroundColor: '#00b281',
                 },
                 headerTintColor: '#fff',
             headerTitleStyle: {
                 fontWeight: 'bold',
+                fontSize:16,
+                color: '#ececec',
+                width: '90%',
+                textAlign: 'center',
             },
+            
         },
       },
       
@@ -93,7 +116,12 @@ const MyNav = createBottomTabNavigator(
         screen: TabviewpagerContainer
       },
       Task: AppNavigatorTwo,
-      Inspeksi: Inspeksi,
+      Inspeksi: {
+        screen: Inspeksi,
+        navigationOptions: { 
+          tabBarVisible: false  
+        }       
+      },
       Finding: AppNavigatorTwo,
       More: AppNavigatorOne
     },

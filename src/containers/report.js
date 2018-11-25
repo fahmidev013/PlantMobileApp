@@ -9,11 +9,13 @@ import {
     Image,
     Text,
     ActivityIndicator,
+    Button,
     Platform,
     TouchableHighlight 
 } from 'react-native';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import * as Actions from '../actions'; //Import your actions
 import SwipeCards from '../components/SwipeCards';
@@ -23,7 +25,8 @@ import Images from '../img/index';
 class Report extends Component {
 
     static navigationOptions = {
-        title: 'Daftar Inspeksi',    
+        title: 'Daftar Inspeksi',
+        
     
         // headerStyle: {
         //     backgroundColor: '#000',
@@ -53,7 +56,7 @@ class Report extends Component {
     }
 
     componentDidMount() {
-        this.props.getApiData(); 
+        //this.props.getApiData(); 
     }
 
     render() {
@@ -72,9 +75,10 @@ class Report extends Component {
                         data={this.props.data}
                         renderItem={this.renderItem}
                         keyExtractor={(item, index) => index}/> */}
+                    
                     <TouchableHighlight style={styles.addButton}
                                         underlayColor='#ff7043' onPress={() => this.props.navigation.navigate('Inspeksi', {})}>
-                        <Text style={{fontSize: 25, color: 'white'}}>+</Text>
+                        <Ionicons name={ "md-create" } size={24} color={"#fff"} />
                     </TouchableHighlight>
                 </View>
             );

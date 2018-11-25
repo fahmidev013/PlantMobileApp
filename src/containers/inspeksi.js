@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry,StyleSheet,View, Text, SectionList } from 'react-native';
+import { AppRegistry,StyleSheet,View, Text, ScrollView, TouchableHighlight, ListView, Slider } from 'react-native';
 import { ViewPager } from 'rn-viewpager';
 
 import StepIndicator from 'react-native-step-indicator';
@@ -82,7 +82,57 @@ export default class Inspeksi extends Component {
     }
   }
 
+
+
+
+    _renderItem = (data) => {
+        return (
+        <View>
+            
+            <Text style={{paddingLeft: 20}}>{data}</Text>
+            
+            <View style={{ flex:1 , flexDirection: 'row', justifyContent: 'space-around'}}>
+            <TouchableHighlight style={styles.addButton}
+                onPress={()=> {color: 'tomato'}}
+                >
+                <Text style={{alignSelf:'center'}}>BAIK</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={styles.addButton}
+                onPress={()=> {color: 'tomato'}}
+                >
+                <Text style={{alignSelf:'center'}}>SEDANG</Text>
+            </TouchableHighlight>
+
+            <TouchableHighlight style={styles.addButton}
+                onPress={()=> {color: 'tomato'}}
+                >
+                <Text style={{alignSelf:'center'}}>KURANG</Text>
+            </TouchableHighlight>
+
+        </View>
+
+        </View>
+        
+        )    
+    }
+
+
+
   render() {
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2  });
+    const perawatan = ds.cloneWithRows([
+        "Piringan",
+        "Pasar Pikul",
+        "TPH",
+        "Gawangan",
+        "Prunning",
+        "Titi Panen"
+      ])
+    
+      const pemupukan = ds.cloneWithRows([
+        "Sistem Penaburan",
+        "Kondisi Pupuk"
+      ])
     return (
       <View style={styles.container}>
         <View style={styles.stepIndicator}>
@@ -95,19 +145,29 @@ export default class Inspeksi extends Component {
           onPageSelected={(page) => {this.setState({currentPage:page.position})}}
           >
 
-                <View style={styles.containerSec}>
-                <SectionList
-                sections={[
-                    {title: 'Perawatan', data: ['Devin', 'James', 'Jillian']},
-                    {title: 'Pemupukan', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-                ]}
-                renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-                renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-                keyExtractor={(item, index) => index}
-                />
-            </View>
+               
+                <View >
 
-            {PAGES.map((page) => this.renderViewPagerPage(page))}
+                <ScrollView>
+
+
+                        <Text style={styles.sectionHeader}>Perawatan</Text> 
+                    <ListView
+                        dataSource={ perawatan }
+                        renderRow={ (data) => this._renderItem(data) }         
+                    />
+
+                <Text style={styles.sectionHeader}>Pemupukan</Text> 
+                    <ListView
+                        dataSource={ pemupukan }
+                        renderRow={ (data) => this._renderItem(data) }  
+                      
+                    />
+              
+
+                </ScrollView>
+
+            </View>    
           </ViewPager>
       </View>
     );
@@ -125,6 +185,7 @@ export default class Inspeksi extends Component {
 }
 
 
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -138,16 +199,39 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center'
     },
+    addButton: {
+        //height: 66, 
+        flexGrow: 1,
+        backgroundColor: '#00b281',
+        borderColor: '#00b281',
+        borderWidth: 1,
+        height: 30,
+        borderRadius: 40 / 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        // position: 'absolute',
+        // bottom: 20,
+        // right: 20,
+        shadowColor: "#000000",
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        // shadowOffset: {
+        //     height: 1,
+        //     width: 0
+        // }
+    },
     containerSec: {
         flex: 1,
         paddingTop: 22
        },
        sectionHeader: {
-         paddingTop: 2,
-         paddingLeft: 10,
+         paddingTop: 10,
+         paddingLeft: 20,
          paddingRight: 10,
-         paddingBottom: 2,
-         fontSize: 14,
+         paddingBottom: 10,
+         fontSize: 18,
+         marginBottom: 15,
          fontWeight: 'bold',
          backgroundColor: 'rgba(247,247,247,1.0)',
        },

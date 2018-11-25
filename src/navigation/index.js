@@ -126,6 +126,7 @@ const MyNav = createBottomTabNavigator(
       More: AppNavigatorOne
     },
     {
+      initialRouteName: 'Inspeksi',
     
         navigationOptions: ({ navigation }) => ({
             

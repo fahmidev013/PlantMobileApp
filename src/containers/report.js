@@ -27,22 +27,6 @@ class Report extends Component {
     static navigationOptions = {
         title: 'Daftar Inspeksi',
         
-    
-        // headerStyle: {
-        //     backgroundColor: '#000',
-        //     },
-        //     headerTintColor: '#000',
-        // headerTitleStyle: {
-        //     fontWeight: 'bold',
-        // },
-
-        // tabBarLabel: 'inScreen',
-        // tabBarIcon: ({ tintColor }) => (
-        //     <Image
-        //         source={require('../../assets/ic_calendar.png')}
-        //         style={[styles.icon, { tintColor: '#f4511e' }]}
-        //     />
-        // ),    
 
       };
 

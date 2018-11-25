@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { AppRegistry,StyleSheet,View, Text, ScrollView, TouchableHighlight, ListView, Slider } from 'react-native';
+import { StyleSheet,View, Text, ScrollView, TouchableHighlight, ListView, Image } from 'react-native';
 import { ViewPager } from 'rn-viewpager';
+import {RNSlidingButton, SlideDirection} from 'rn-sliding-button';
 
 import StepIndicator from 'react-native-step-indicator';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Images from '../img/index';
 
 const PAGES = ['Page 1','Page 2','Page 3'];
 
@@ -64,14 +66,49 @@ const getStepIndicatorIconConfig = ({ position, stepStatus }) => {
   };
 
 
+
+
+const HeaderInspeksi = (props) =>  (
+        <View style={{height:70, justifyContent: 'flex-start', flexDirection: 'row'}}>
+        <Image source={Images.petani} style={{width: 30, height: 30 , padding: 30, marginLeft: 30 ,alignSelf: 'center'}}/>
+        <View style={{justifyContent: 'center', flexDirection: 'column', paddingLeft: 30}}>
+            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#000000'}}>Di Ujung Baris</Text>
+            <Text >Ini untuk kamu input baris ini</Text>
+        </View>
+    </View>
+)
+
+
+
+
 export default class Inspeksi extends Component {
+
+
+    static navigationOptions = {
+        title: 'Inspeksi',    
+
+      };
+
 
   constructor() {
     super();
     this.state = {
       currentPage:0,
-      stepCount:3
+      stepCount:3,
+      value: 50,
     }
+  }
+
+  onSlideRight = () => {
+    //perform Action on slide success.
+    };
+
+  change(value) {
+    this.setState(() => {
+      return {
+        value: parseFloat(value),
+      };
+    });
   }
 
   componentWillReceiveProps(nextProps,nextState) {
@@ -133,6 +170,9 @@ export default class Inspeksi extends Component {
         "Sistem Penaburan",
         "Kondisi Pupuk"
       ])
+
+      const {value} = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.stepIndicator}>
@@ -147,7 +187,7 @@ export default class Inspeksi extends Component {
 
                
                 <View >
-
+                <HeaderInspeksi/>
                 <ScrollView>
 
 
@@ -164,6 +204,20 @@ export default class Inspeksi extends Component {
                       
                     />
               
+                                <RNSlidingButton
+                    style={{
+                        width: 240
+                    }}
+                    height={35}
+                    onSlidingSuccess={this.onSlideRight}
+                    slideDirection={SlideDirection.RIGHT}>
+                    <View>
+                        <Text numberOfLines={1} style={styles.titleText}>
+                        Selesai Baris Ini >
+                        </Text>
+                    </View>
+                    </RNSlidingButton>
+
 
                 </ScrollView>
 
@@ -185,19 +239,24 @@ export default class Inspeksi extends Component {
 }
 
 
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#ffffff',
     },
     stepIndicator: {
-      marginVertical:50,
+      marginVertical:20,
     },
     page: {
       flex:1,
       justifyContent:'center',
       alignItems:'center'
+    },
+    titleText: {
+        fontSize: 17,
+        fontWeight: 'normal',
+        textAlign: 'center',
+        color: '#ffffff'
     },
     addButton: {
         //height: 66, 
@@ -210,16 +269,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
-        // position: 'absolute',
-        // bottom: 20,
-        // right: 20,
         shadowColor: "#000000",
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        // shadowOffset: {
-        //     height: 1,
-        //     width: 0
-        // }
     },
     containerSec: {
         flex: 1,

@@ -11,7 +11,8 @@ const images = {
         refresh: 'md-refresh',
         create: 'md-create'
     },
-    header: require('../../assets/bg_header.png')
+    header: require('../../assets/bg_header.png'),
+    petani: require('../../assets/ic_finish_walking.png')
 };
 
 export default images;

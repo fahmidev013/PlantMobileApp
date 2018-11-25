@@ -110,6 +110,34 @@ const TabviewpagerContainer = StackNavigator(
   }
 );
 
+
+const TabInspeksiContainer = StackNavigator(
+  {
+      Ins: {
+        screen: Inspeksi,
+        navigationOptions : {
+            title: 'Buat Inspeksi',       
+            headerRight: <MailBtn direction='right'/>,
+            //header: (props) => <ImageHeader {...props} />, 
+            //header: (props) => <ImageHeader titl='HOMEPAGE' />,
+            headerStyle: {
+                backgroundColor: '#00b281',
+                },
+                headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize:16,
+                color: '#ececec',
+            },
+            
+        },
+      },
+      
+  }
+);
+
+
+
 const MyNav = createBottomTabNavigator(
     {
       Home: {
@@ -117,7 +145,7 @@ const MyNav = createBottomTabNavigator(
       },
       Task: AppNavigatorTwo,
       Inspeksi: {
-        screen: Inspeksi,
+        screen: TabInspeksiContainer,
         navigationOptions: { 
           tabBarVisible: false  
         }       

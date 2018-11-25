@@ -22,6 +22,7 @@
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "rn-sliding-button": "^1.1.5",
     "rn-viewpager": "^1.2.9"
   },
   "devDependencies": {
